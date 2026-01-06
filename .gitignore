@@ -1,0 +1,14 @@
+
+*.vcd
+*.log
+*.out
+waves/
+results/
+
+csrc/
+simv*
+work/
+
+.vscode/
+.idea/
+.DS_Store
