@@ -1,0 +1,38 @@
+# Vivado/XSim generated files
+xsim.dir/
+*.jou
+*.log
+*.pb
+*.wdb
+*.vcd
+*.vpd
+*.fst
+webtalk*.jou
+webtalk*.log
+xelab.*
+xvlog.*
+xsim.*
+
+# Vivado project-mode generated folders
+*.cache/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+*.srcs/
+*.gen/
+*.xpr
+
+# Coverage outputs
+xsim.codeCov/
+xsim.CodeCov/
+coverage_report/
+cov/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
