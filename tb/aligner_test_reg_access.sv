@@ -12,11 +12,16 @@
           task run_phase(uvm_phase phase);
             phase.raise_objection(this);
 
-            `uvm_info("TEST", "aligner_test_reg_access started", UVM_LOW)
+            #100ns; 
 
-            #100ns;
+            for (int i = 0; i < 10; i++) begin
+                apb_item_driver apb_item = apb_item_driver::type_id::create("apb_item");
+                apb_item.randomize();
 
-            `uvm_info("TEST", "aligner_test_reg_access finished", UVM_LOW)
+                `uvm_info("ALIGNER_TEST", $sformatf("[ITEM NUMBER: %0d] item: %0s", i, apb_item.convert2string()), UVM_LOW)
+            end
+
+                `uvm_info("ALIGNER_TEST", "Test completed", UVM_LOW)
 
             phase.drop_objection(this);
         endtask

@@ -7,7 +7,8 @@
     package aligner_test_pkg;
 
         import env_pkg::*;
-        import uvm_pkg::*; 
+        import uvm_pkg::*;
+        import apb_pkg::*; 
 
         `include "aligner_test_base.sv"
         `include "aligner_test_reg_access.sv"

@@ -9,6 +9,8 @@ import aligner_test_pkg::*;
 logic clk;
 logic rst_n;
 
+apb_if vif(.clk(clk));
+
 initial begin
     clk = 0; 
     forever begin
@@ -18,11 +20,17 @@ initial begin
 end
 
 initial begin
-    rst_n = 1;
+    vif.rst_n = 1;
     #6ns;
-    rst_n = 0;
+    vif.rst_n = 0;
     #30ns;
-    rst_n = 1;
+    vif.rst_n = 1;
+end
+
+initial begin
+
+    uvm_config_db#(virtual apb_if)::set(null, "uvm_test_top.env.apb_agent", "vif", vif); // put the vif in the databade
+
 end
 
 initial begin
@@ -31,7 +39,17 @@ end
 
 cfs_aligner DUT(
     .clk(clk), 
-    .reset_n(rst_n)
+    .reset_n(vif.rst_n),
+
+    .paddr(vif.paddr),
+    .pwdata(vif.pwdata),
+    .prdata(vif.prdata),
+    .penable(vif.penable),
+    .pwrite(vif.pwrite),
+    .psel(vif.psel),
+    .pready(vif.pready),
+    .pslverr(vif.pslverr)
+
 );
 
 

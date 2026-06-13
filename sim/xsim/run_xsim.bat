@@ -28,13 +28,13 @@ if errorlevel 1 (
     exit /b %errorlevel%
 )
 
-@REM UNCOMMENT -wdb tb_sim.wdb TO CREATE WAVEFORM
+@REM ADD THE LINE BELOW UNDER THE PLUSARG LINE TO ENABLE WAVEFORMs
+:: -wdb tb_sim.wdb ^
 echo.
 echo Running simulation and creating waveform database...
 call xsim tb_sim ^
     -testplusarg UVM_TESTNAME=%TESTNAME% ^
     -testplusarg UVM_NO_RELNOTES ^
-    @REM -wdb tb_sim.wdb ^
     -tclbatch run.tcl
 
 if errorlevel 1 (
