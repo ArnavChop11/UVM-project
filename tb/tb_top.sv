@@ -1,29 +1,38 @@
+`include "uvm_macros.svh"
+`include "test_pkg.sv"
+
+module tb_top();
 
 import uvm_pkg::*;
-`include "uvm_macros.svh"
+import aligner_test_pkg::*;
 
-class smoke_test extends uvm_test;
-  `uvm_component_utils(smoke_test)
+logic clk;
+logic rst_n;
 
-  function new(string name = "smoke_test", uvm_component parent = null);
-    super.new(name, parent);
-  endfunction
+initial begin
+    clk = 0; 
+    forever begin
+        clk = #5ns ~clk;
+    end
 
-  task run_phase(uvm_phase phase);
-    phase.raise_objection(this);
+end
 
-    `uvm_info("SMOKE", "Vivado XSim UVM smoke test is running", UVM_LOW)
+initial begin
+    rst_n = 1;
+    #6ns;
+    rst_n = 0;
+    #30ns;
+    rst_n = 1;
+end
 
-    #10ns;
+initial begin
+    run_test("aligner_test_reg_access"); // Pass  test name to run test 
+end
 
-    `uvm_info("SMOKE", "Vivado XSim UVM smoke test passed", UVM_LOW)
+cfs_aligner DUT(
+    .clk(clk), 
+    .reset_n(rst_n)
+);
 
-    phase.drop_objection(this);
-  endtask
-endclass
 
-module tb_top;
-  initial begin
-    run_test("smoke_test");
-  end
 endmodule

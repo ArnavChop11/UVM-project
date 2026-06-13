@@ -28,9 +28,15 @@ if errorlevel 1 (
     exit /b %errorlevel%
 )
 
+@REM UNCOMMENT -wdb tb_sim.wdb TO CREATE WAVEFORM
 echo.
-echo Running...
-call xsim tb_sim -testplusarg UVM_NO_RELNOTES -tclbatch run.tcl
+echo Running simulation and creating waveform database...
+call xsim tb_sim ^
+    -testplusarg UVM_TESTNAME=%TESTNAME% ^
+    -testplusarg UVM_NO_RELNOTES ^
+    @REM -wdb tb_sim.wdb ^
+    -tclbatch run.tcl
+
 if errorlevel 1 (
     echo Simulation failed.
     exit /b %errorlevel%
