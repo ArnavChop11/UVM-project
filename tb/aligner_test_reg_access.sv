@@ -14,16 +14,53 @@
 
             #100ns; 
 
-            for (int i = 0; i < 10; i++) begin
-                apb_item_driver apb_item = apb_item_driver::type_id::create("apb_item");
-                apb_item.randomize();
+            fork
+                begin
+                    apb_sequence_simple reg_access_seq;
+                    reg_access_seq = apb_sequence_simple::type_id::create("reg_access_seq");
 
-                `uvm_info("ALIGNER_TEST", $sformatf("[ITEM NUMBER: %0d] item: %0s", i, apb_item.convert2string()), UVM_LOW)
-            end
+                    //reg_access_seq.item.test_label = "SIMPLE_TEST";
 
-                `uvm_info("ALIGNER_TEST", "Test completed", UVM_LOW)
+                    reg_access_seq.randomize() with {
+                        item.addr == 'h222;
+                    };
 
-            phase.drop_objection(this);
+                    reg_access_seq.start(env.agent.sequencer);
+                end
+
+                begin
+
+                    apb_sequence_rw seq_rw;
+
+                    seq_rw = apb_sequence_rw::type_id::create("seq_rw");
+
+                    //seq_rw.item.test_label = "RW_TEST";
+
+                    seq_rw.randomize() with {
+                        address == 'h4;
+                        
+                    };
+
+                    seq_rw.start(env.agent.sequencer);
+
+                end
+
+                begin
+
+                    apb_sequence_rand seq_rand;
+
+                    seq_rand = apb_sequence_rand::type_id::create("seq_rand");
+                    //seq_rand.item.test_label = "RAND_TEST";
+                    assert(seq_rand.randomize() with { 
+                        num_items == 1;  
+                    }) else `uvm_fatal("ALIGNER_TEST", "Failed to randomize seq_rand");
+
+                    seq_rand.start(env.agent.sequencer); 
+
+                end
+            join
+                phase.drop_objection(this);
+            
         endtask
 
     endclass

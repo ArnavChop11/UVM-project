@@ -28,12 +28,8 @@ initial begin
 end
 
 initial begin
+    uvm_config_db#(virtual apb_if)::set(null, "uvm_test_top.env.apb_agent", "vif", vif); // put the vif in the database
 
-    uvm_config_db#(virtual apb_if)::set(null, "uvm_test_top.env.apb_agent", "vif", vif); // put the vif in the databade
-
-end
-
-initial begin
     run_test("aligner_test_reg_access"); // Pass  test name to run test 
 end
 

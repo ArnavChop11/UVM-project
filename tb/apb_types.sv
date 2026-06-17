@@ -1,7 +1,7 @@
 `ifndef APB_TYPES_SV
     `define APB_TYPES_SV
 
-typedef virtual apb_if vif;
+typedef virtual apb_if apb_vif;
 
 typedef enum bit {APB_READ = 0, APB_WRITE = 1} apb_rw_t;
 

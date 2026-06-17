@@ -16,6 +16,7 @@
         rand apb_addr_t addr;
         rand apb_data_t data;
         rand apb_rw_t rw;
+        string test_label;
 
         rand int unsigned pre_drive_delay;
         rand int unsigned post_drive_delay;
@@ -25,17 +26,16 @@
 
         virtual function string convert2string();
 
-            string result; 
+            string result;
 
             if (rw == APB_WRITE) begin
-
-                result = $sformatf("dir: %0s, addr: %0h, data: %0h", rw.name(), addr, data); 
-
+                result = $sformatf("TEST_NAME: %s, dir: %s, addr: %0h, data: %0h\n\n", test_label, rw.name(), addr, data);
+            end else begin
+                result = $sformatf("TEST_NAME: %s, addr: %h, data: %h, rw: %s, pre_drive_delay: %0d, post_drive_delay: %0d\n\n",
+                    test_label, addr, data, rw.name(), pre_drive_delay, post_drive_delay);
             end
-                result =  $sformatf("addr: %h, data: %h, rw: %b, pre_drive_delay: %0d, post_drive_delay: %0d", 
-                    addr, data, rw, pre_drive_delay, post_drive_delay);
 
-        return result; 
+            return result;
         endfunction
 
     endclass
