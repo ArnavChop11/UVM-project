@@ -10,6 +10,8 @@
 
         apb_sequencer sequencer;
         apb_driver driver;
+        apb_monitor monitor; 
+
 
         `uvm_component_utils(apb_agent)
 
@@ -27,10 +29,11 @@
             super.build_phase(phase);
 
             agent_cfg = apb_agent_config::type_id::create("agent_cfg", this);
+            monitor = apb_monitor::type_id::create("monitor", this); 
 
             if (agent_cfg.get_is_active() == UVM_ACTIVE) begin
                 sequencer = apb_sequencer::type_id::create("sequencer", this);
-                driver = apb_driver::type_id::create("driver", this);
+                driver = apb_driver::type_id::create("driver", this); 
             end
 
         endfunction
@@ -49,12 +52,12 @@
 
             agent_cfg.set_vif(vif);
 
+            monitor.cfg = agent_cfg;
+
             if (agent_cfg.get_is_active() == UVM_ACTIVE) begin
                 driver.cfg = agent_cfg;
                 driver.seq_item_port.connect(sequencer.seq_item_export);
             end
-
-
 
         endfunction
 

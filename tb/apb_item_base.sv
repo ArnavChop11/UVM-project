@@ -11,6 +11,16 @@
             super.new(name);
         endfunction
 
+        rand apb_addr_t addr;
+        rand apb_data_t data;
+        rand apb_rw_t rw;
+
+        virtual function string convert2string();
+            string result = $sformatf("R/W: %0s, addr: %0x", rw.name(), addr);
+      
+        return result;
+    endfunction
+
     endclass
 
 `endif

@@ -7,13 +7,14 @@
 
     package apb_pkg;
 
-        //import aligner_test_pkg::*;
         import uvm_pkg::*;
 
         `include "apb_types.sv"
         `include "apb_agent_config.sv"
         `include "apb_item_base.sv"
         `include "apb_item_driver.sv"
+        `include "apb_item_monitor.sv"
+        `include "apb_monitor.sv"
         `include "apb_sequencer.sv"
         `include "apb_driver.sv"
         `include "apb_sequence_base.sv"

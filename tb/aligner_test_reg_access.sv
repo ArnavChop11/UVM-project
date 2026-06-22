@@ -22,7 +22,7 @@
                     //reg_access_seq.item.test_label = "SIMPLE_TEST";
 
                     reg_access_seq.randomize() with {
-                        item.addr == 'h222;
+                        item.addr == 'h0;
                     };
 
                     reg_access_seq.start(env.agent.sequencer);
@@ -37,7 +37,7 @@
                     //seq_rw.item.test_label = "RW_TEST";
 
                     seq_rw.randomize() with {
-                        address == 'h4;
+                        address == 'h000C;
                         
                     };
 

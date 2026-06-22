@@ -8,12 +8,15 @@ xsim.dir/
 *.vpd
 *.fst
 *.lpr
-*.txt
 webtalk*.jou
 webtalk*.log
 xelab.*
 xvlog.*
 xsim.*
+
+
+**/dfx_runtime.txt
+
 
 
 

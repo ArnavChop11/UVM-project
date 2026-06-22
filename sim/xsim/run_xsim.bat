@@ -35,7 +35,6 @@ echo Running simulation and creating waveform database...
 call xsim tb_sim ^
     -testplusarg UVM_TESTNAME=%TESTNAME% ^
     -testplusarg UVM_NO_RELNOTES ^
-    -wdb tb_sim.wdb ^
     -tclbatch run.tcl
 
 if errorlevel 1 (
